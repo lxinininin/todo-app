@@ -16,7 +16,7 @@ while True:
             # we can replace the previous one with this 'with' expression, and we don't need write file.close()
             # (The close() method is called implicitly even though we don't call it explicitly.
             # The Python interpreter will call the method when it sees that we have written a with-context manager.)
-            with open("files/todos.txt", 'r') as file:
+            with open("../files/todos.txt", 'r') as file:
                 todos = file.readlines()
 
             todos.append(todo)
@@ -28,7 +28,7 @@ while True:
             file.close()
             """
             # we can replace the previous one with this 'with' expression, and we don't need write file.close()
-            with open("files/todos.txt", 'w') as file:
+            with open("../files/todos.txt", 'w') as file:
                 file.writelines(todos)
 
         case "show":
@@ -37,7 +37,7 @@ while True:
             todos = file.readlines()
             file.close()
             """
-            with open("files/todos.txt", 'r') as file:
+            with open("../files/todos.txt", 'r') as file:
                 todos = file.readlines()
 
             """
@@ -66,26 +66,26 @@ while True:
             number = int(input("Number of the todo to edit: "))
             number -= 1
 
-            with open("files/todos.txt", 'r') as file:
+            with open("../files/todos.txt", 'r') as file:
                 todos = file.readlines()
 
             new_todo = input("Enter new todo: ")
             todos[number] = new_todo + '\n'
 
-            with open("files/todos.txt", 'w') as file:
+            with open("../files/todos.txt", 'w') as file:
                 file.writelines(todos)
 
         case "complete":
             number = int(input("Number of the todo to complete: "))
 
-            with open("files/todos.txt", 'r') as file:
+            with open("../files/todos.txt", 'r') as file:
                 todos = file.readlines()
 
             index = number - 1
             todo_to_remove = todos[index].strip('\n')
             todos.pop(index)
 
-            with open("files/todos.txt", 'w') as file:
+            with open("../files/todos.txt", 'w') as file:
                 file.writelines(todos)
 
             message = f"Todo {todo_to_remove} was removed from the list"
