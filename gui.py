@@ -2,16 +2,24 @@ import functions
 import PySimpleGUI as sg
 
 label = sg.Text("Type in a to-do")
+
 input_box = sg.InputText(tooltip="Enter todo", key="todo")
 add_button = sg.Button("Add")
+
 list_box = sg.Listbox(values=functions.get_todos(), key="todos",
                       enable_events=True, size=(45, 10))
 edit_button = sg.Button("Edit")
+complete_button = sg.Button("Complete")
+
+exit_button = sg.Button("Exit")
 
 # the aim of [label], [input_box] is to separate label and input_box in two different lines
 # if we use [label, input_box], they will be in one line
 window = sg.Window(title="My To-Do App",
-                   layout=[[label], [input_box, add_button], [list_box, edit_button]],
+                   layout=[[label],
+                           [input_box, add_button],
+                           [list_box, edit_button, complete_button],
+                           [exit_button]],
                    font=('Helvetica', 20))
 
 # we can use while statement to keep the window open
@@ -51,6 +59,19 @@ while True:
 
             # we would like to when we edit todos, the window will refresh todos list in list_box
             window["todos"].update(values=todos)
+
+        case "Complete":
+            todo_to_complete = values["todos"][0]
+            todos = functions.get_todos()
+            todos.remove(todo_to_complete)
+            functions.write_todos(todos)
+
+            window["todos"].update(values=todos)
+            # in this case, we would like to when we complete one todo, it will not show in the input_box
+            window["todo"].update(value='')
+
+        case "Exit":
+            break
 
         # this is used to when we click one element in list_box, it will display in the input_box
         case "todos":

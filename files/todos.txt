@@ -1,8 +1,7 @@
-play chess
-update the OS
 do jogging
 clean the room
 cook
 doing the laundry
 play video games
 add new todo
+
