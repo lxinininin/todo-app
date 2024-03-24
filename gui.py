@@ -9,7 +9,13 @@ clock = sg.Text("", key="clock")
 label = sg.Text("Type in a to-do")
 
 input_box = sg.InputText(tooltip="Enter todo", key="todo")
-add_button = sg.Button("Add", size=10)
+# add_button = sg.Button("Add", size=10)
+# we would like to change the button form
+add_button = sg.Button(size=2,
+                       image_source="add.png",
+                       mouseover_colors="LightBlue2",  # when we put mouse on the button, it will change the color
+                       tooltip="Add Todo",  # when we put mouse on the button, we can get a tip message
+                       key="Add")  # this is used to match case "Add" below
 
 list_box = sg.Listbox(values=functions.get_todos(), key="todos",
                       enable_events=True, size=(45, 10))
